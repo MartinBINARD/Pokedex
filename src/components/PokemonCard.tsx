@@ -15,7 +15,7 @@ export default function PokemonCard({ pokemon }: PokemonCardProps) {
         <h3 className="font-bold text-cyan-400">
           {`#${pokemon.pokedexId} - ${pokemon.name.fr}`}
         </h3>
-        <h4 className="text-cyan-600 text-center">{pokemon.name.en}</h4>
+        <h4 className="text-cyan-600 text-center">{pokemon.name.jp}</h4>
       </div>
       <p className="flex flex-wrap gap-2 justify-center">
         {pokemon.types?.map((type) => (

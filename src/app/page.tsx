@@ -1,6 +1,5 @@
-import PokemonCard from "@/components/PokemonCard"; // @ : alias de `src/`
-
 import { Pokemon } from "@/@types/pokemon";
+import PokemonList from "@/components/PokemonList";
 
 async function getData() {
   const res = await fetch("https://api-pokemon-fr.vercel.app/api/v1/pokemon");
@@ -15,8 +14,8 @@ async function getData() {
 
 export default async function Home() {
   const pokemons = await getData();
-  const pokemonsFiltered = pokemons.slice(0, 12);
-  console.log(pokemonsFiltered); // ça se passe côté serveur, donc dans le terminal !
+  // const pokemonsFiltered = pokemons.slice(0, 12);
+  // console.log(pokemonsFiltered); // ça se passe côté serveur, donc dans le terminal !
 
   return (
     // padding : je veux 48px
@@ -31,16 +30,7 @@ export default async function Home() {
     <main className="bg-cyan-950 min-h-screen p-12">
       <h1 className="font-bold text-cyan-400 text-4xl pb-12">Pokedex</h1>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-2 p-2">
-        {pokemonsFiltered.map((pokemon) => (
-          <a
-            key={pokemon.pokedexId}
-            href={`/pokemon/${pokemon.name.fr.toLowerCase()}`}
-          >
-            <PokemonCard pokemon={pokemon} />
-          </a>
-        ))}
-      </div>
+      <PokemonList pokemons={pokemons} />
     </main>
   );
 }
