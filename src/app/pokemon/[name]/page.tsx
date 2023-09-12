@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Pokemon } from "@/@types/pokemon";
+import PreviousButton from "@/components/PreviousButton";
 
 interface SingleProps {
   params: {
@@ -28,9 +28,7 @@ export default async function Single({ params }: SingleProps) {
         {pokemon.name.fr}
       </h1>
 
-      <Link href="/" className="text-white">
-        ← Accueil
-      </Link>
+      <PreviousButton />
 
       <img
         src={pokemon.sprites.shiny || pokemon.sprites.regular}

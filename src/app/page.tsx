@@ -2,7 +2,7 @@ import { Pokemon } from "@/@types/pokemon";
 import PokemonList from "@/components/PokemonList";
 
 async function getData() {
-  const res = await fetch("https://api-pokemon-fr.vercel.app/api/v1/pokemon");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pokemon`);
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary

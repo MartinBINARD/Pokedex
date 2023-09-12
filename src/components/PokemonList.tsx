@@ -1,7 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+
 import { Pokemon } from "@/@types/pokemon";
+
 import PokemonCard from "./PokemonCard";
 
 interface PokemonListProps {
@@ -9,6 +13,10 @@ interface PokemonListProps {
 }
 
 export default function PokemonList({ pokemons }: PokemonListProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [page, setPage] = useState(0);
   const [perPage, setPerPage] = useState(12);
 
@@ -16,6 +24,14 @@ export default function PokemonList({ pokemons }: PokemonListProps) {
   const end = start + perPage;
 
   const pokemonsFiltered = pokemons.slice(start, end);
+
+  useEffect(() => {
+    const url =
+      page === 0 && perPage === 12
+        ? `${pathname}`
+        : `${pathname}?page=${page}&perPage=${perPage}`;
+    router.push(url);
+  }, [page, pathname, perPage, router]);
 
   return (
     <>
@@ -43,9 +59,10 @@ export default function PokemonList({ pokemons }: PokemonListProps) {
         <div>
           <span className="text-slate-300">Afficher </span>
           <select
-            onChange={(e) => setPerPage(Number(e.target.value))}
             value={perPage}
+            onChange={(e) => setPerPage(Number(e.target.value))}
           >
+            <option value="12">12</option>
             <option value="20">20</option>
             <option value="50">50</option>
             <option value="100">100</option>
@@ -57,12 +74,12 @@ export default function PokemonList({ pokemons }: PokemonListProps) {
 
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-2 p-2">
         {pokemonsFiltered.map((pokemon) => (
-          <a
+          <Link
             key={pokemon.pokedexId}
             href={`/pokemon/${pokemon.name.fr.toLowerCase()}`}
           >
             <PokemonCard pokemon={pokemon} />
-          </a>
+          </Link>
         ))}
       </div>
     </>
