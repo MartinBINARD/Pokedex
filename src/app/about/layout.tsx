@@ -1,12 +1,11 @@
-import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Pokedex",
-  description: "Mon super Pokedex",
+  title: "À propos",
+  description: "Page dans un layout spécifique",
 };
 
 export default function RootLayout({
@@ -16,7 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <h1>LAYOUT de À propos</h1>
+        <aside>Sidebar</aside>
+        {children}
+      </body>
     </html>
   );
 }
