@@ -8,9 +8,7 @@ interface SingleProps {
 }
 
 async function getData(name: string) {
-  const res = await fetch(
-    `https://api-pokemon-fr.vercel.app/api/v1/pokemon/${name}`
-  );
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pokemon/${name}`);
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
